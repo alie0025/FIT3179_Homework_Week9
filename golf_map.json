@@ -58,21 +58,21 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_ocean.json",
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/refs/heads/main/ne_10m_ocean.json",
         "format": {"type": "topojson", "feature": "ne_10m_ocean"}
       },
       "mark": {"type": "geoshape", "fill": "#ddeeff"}
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_land.json",
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/refs/heads/main/ne_10m_land.json",
         "format": {"type": "topojson", "feature": "ne_10m_land"}
       },
       "mark": {"type": "geoshape", "fill": "#acc0af", "stroke": "#cccccc"}
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_admin_1_states_provinces.json",
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/refs/heads/main/ne_10m_admin_1_states_provinces.json",
         "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
       },
       "transform": [
@@ -83,7 +83,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_admin_1_states_provinces.json",
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/refs/heads/main/ne_10m_admin_1_states_provinces.json",
         "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
       },
       "transform": [
@@ -99,14 +99,14 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_graticules_30.json",
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/refs/heads/main//ne_10m_graticules_30.json",
         "format": {"type": "topojson", "feature": "ne_10m_graticules_30"}
       },
       "mark": {"type": "geoshape", "stroke": "#e0e0e0", "strokeWidth": 0.5, "fill": null}
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/golf_with_state.json",
+        "url": "hhttps://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/refs/heads/main//golf_with_state.json",
         "format": {"type": "topojson", "feature": "golf_with_state"}
       },
       "transform": [
