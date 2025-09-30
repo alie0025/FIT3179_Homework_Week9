@@ -1,0 +1,10 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+#golf_map {
+  width: 900px;
+  margin: 0 auto;
+}

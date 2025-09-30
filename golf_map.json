@@ -1,0 +1,159 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 550,
+  "title": "Golf Courses in Australia (Present Time)",
+  "projection": {
+    "type": "orthographic",
+    "rotate": [-135, 26, 0],
+    "scale": 850
+  },
+ "params": [
+    {
+      "name": "StateSelect",
+      "value": "All States",
+      "bind": {
+        "input": "select",
+        "name": "Filter by State: ",
+        "options": [
+          "All States",
+          "NSW",
+          "QLD",
+          "VIC",
+          "SA",
+          "WA",
+          "TAS",
+          "NT"
+        ],
+        "labels": [
+          "All States",
+          "New South Wales",
+          "Queensland",
+          "Victoria",
+          "South Australia",
+          "Western Australia",
+          "Tasmania",
+          "Northern Territory"
+        ]
+      }
+    },
+    {
+      "name": "TypeSelect",
+      "value": "All Types",
+      "bind": {
+        "input": "select",
+        "name": "Filter by Course Type: ",
+        "options": [
+          "All Types",
+          "18_hole",
+          "9_hole",
+          "12_hole",
+          "13_hole",
+          "27_hole",
+          "36_hole"
+        ]
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_ocean.json",
+        "format": {"type": "topojson", "feature": "ne_10m_ocean"}
+      },
+      "mark": {"type": "geoshape", "fill": "#ddeeff"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_land.json",
+        "format": {"type": "topojson", "feature": "ne_10m_land"}
+      },
+      "mark": {"type": "geoshape", "fill": "#acc0af", "stroke": "#cccccc"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_admin_1_states_provinces.json",
+        "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
+      },
+      "transform": [
+        {"filter": "datum.properties['name'] != 'Australian Capital Territory' && datum.properties['name'] != 'Jervis Bay Territory'"},
+        {"filter": "StateSelect == 'All States' || datum.properties['postal'] == StateSelect"}
+      ],
+      "mark": {"type": "geoshape", "fill": null, "stroke": "#999", "strokeWidth": 0.8}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_admin_1_states_provinces.json",
+        "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
+      },
+      "transform": [
+        {"filter": "datum.properties['name'] != 'Australian Capital Territory' && datum.properties['name'] != 'Jervis Bay Territory'"}
+      ],
+      "mark": {"type": "text", "fontSize": 10},
+      "encoding": {
+        "longitude": {"field": "properties.longitude", "type": "quantitative"},
+        "latitude": {"field": "properties.latitude", "type": "quantitative"},
+        "text": {"field": "properties.name", "type": "nominal"},
+        "color": {"value": "black"}
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/ne_10m_graticules_30.json",
+        "format": {"type": "topojson", "feature": "ne_10m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "stroke": "#e0e0e0", "strokeWidth": 0.5, "fill": null}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/golf_with_state.json",
+        "format": {"type": "topojson", "feature": "golf_with_state"}
+      },
+      "transform": [
+        {"calculate": "datum.geometry.coordinates[0]", "as": "lon"},
+        {"calculate": "datum.geometry.coordinates[1]", "as": "lat"},
+        {"calculate": "datum.properties['golf.course']", "as": "course_type"},
+        {"calculate": "datum.properties['state']", "as": "state"},
+        {"filter": "datum.state != 'ACT' && datum.state != 'JBT'"},
+        {"filter": "StateSelect == 'All States' || datum.state == StateSelect"},
+        {"filter": "TypeSelect == 'All Types' || datum.course_type == TypeSelect"},
+        {"bin": {"maxbins": 60}, "field": "lon", "as": "binned_lon"},
+        {"bin": {"maxbins": 60}, "field": "lat", "as": "binned_lat"},
+        {"aggregate": [{"op": "count", "as": "course_count"}], "groupby": ["binned_lon", "binned_lat", "state"]}
+      ],
+      "mark": {"type": "circle", "filled": true, "stroke": "white", "strokeWidth": 0.3},
+      "encoding": {
+        "longitude": {"field": "binned_lon", "type": "quantitative"},
+        "latitude": {"field": "binned_lat", "type": "quantitative"},
+        "size": {
+          "field": "course_count",
+          "type": "quantitative",
+          "title": "Number of Courses",
+          "scale": {"range": [10, 500]}
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State",
+          "scale": {
+            "domain": ["NSW","QLD","VIC","SA","WA","TAS","NT"],
+            "range": [
+              "#E41A1C",
+              "#377EB8",
+              "#4DAF4A",
+              "#984EA3",
+              "#FF7F00",
+              "#FFFF33",
+              "#A65628"
+            ]
+          }
+        },
+        "opacity": {"value": 0.4},
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "course_count", "title": "Golf Courses"}
+        ]
+      }
+    }
+  ]
+}

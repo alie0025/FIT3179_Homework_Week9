@@ -1,0 +1,20 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Golf Courses in Australia</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <h1>Golf Courses in Australia</h1>
+    <div id="vis"></div>
+
+    <script>
+        vegaEmbed('#vis', 'https://raw.githubusercontent.com/alie0025/FIT3179_Homework_Week9/main/golf_map.json').then(function(result) {
+        console.log("✅ Map loaded");
+        }).catch(console.error);
+    </script>
+    </body>
+    </html>
